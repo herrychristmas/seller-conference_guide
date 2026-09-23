@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>NEXT STAGE</title>
+<style>
+body{--accent:#39D9F0}
+
+:root{--bg:#141414;--panel:#1b1b1b;--text:#fff;--muted:#a6aba6;--green:#00C400;--blue:#3F64FF}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--text)}
+body{font-family:Pretendard,-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR",sans-serif;word-break:keep-all}
+a{color:inherit;text-decoration:none} button{font:inherit}
+.app{width:min(100%,1040px);margin:auto;padding:0 34px 72px}
+.top{height:68px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #292929}
+.brand-logo{display:flex;align-items:center;width:112px;height:38px;overflow:hidden}
+.brand-logo img{display:block;width:100%;height:100%;object-fit:contain;object-position:left center}
+.event-date{margin-left:auto;font-size:16px;line-height:1;font-weight:850;letter-spacing:.025em;color:#e2e5e2}
+.entry{min-height:calc(100svh - 68px);display:flex;align-items:center;justify-content:center;flex-direction:column;padding:42px 0 38px;text-align:center;position:relative;cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent}
+.entry-inner{width:100%;transform:scale(1);transition:transform .18s ease,opacity .35s ease}
+.entry:active .entry-inner{transform:scale(.965)} .entry.is-pressed .entry-inner{transform:scale(.94);opacity:.84}
+.rings{width:176px;height:176px;display:grid;place-items:center;position:relative;margin:0 auto 22px}
+.ring{position:absolute;border:1.5px solid rgba(0,196,0,.42);border-radius:50%;animation:pulse 1.55s ease-out infinite}
+.r1{width:78px;height:78px}.r2{width:124px;height:124px;animation-delay:.18s}.r3{width:172px;height:172px;animation-delay:.36s}
+.center{width:70px;height:70px;border-radius:50%;background:#fff;color:#111;display:grid;place-items:center;font-weight:900;font-size:26px;box-shadow:0 0 0 0 rgba(0,196,0,.28);animation:centerPulse 1.55s ease-in-out infinite}
+.entry small{font-size:14px;color:#a4aaa4}.entry h1{font-size:36px;line-height:1.24;letter-spacing:-.055em;margin:13px 0 0}.entry h1 em{font-style:normal;color:var(--accent,var(--green))}
+.tap{margin-top:30px;min-width:238px;min-height:54px;padding:8px 18px 8px 9px;display:inline-flex;align-items:center;justify-content:flex-start;gap:12px;border:1px solid color-mix(in srgb,var(--accent,var(--green)) 58%,transparent);border-radius:999px;background:linear-gradient(180deg,#242824,#1b1e1b);color:#fff;box-shadow:0 8px 24px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.07);font-size:14px;font-weight:800;cursor:pointer}
+.tap-dot{width:38px;height:38px;flex:0 0 38px;display:grid;place-items:center;border-radius:50%;background:var(--accent,var(--green));color:#081108;font-size:17px;font-weight:950;animation:tapHint 1.8s ease-out infinite}
+@keyframes pulse{0%{transform:scale(.7);opacity:0}35%{opacity:1}100%{transform:scale(1.08);opacity:0}}
+@keyframes centerPulse{50%{box-shadow:0 0 0 12px rgba(0,196,0,0)}}@keyframes tapHint{0%{box-shadow:0 0 0 0 rgba(0,196,0,.28)}70%,100%{box-shadow:0 0 0 10px rgba(0,196,0,0)}}
+.content{opacity:0;max-height:0;overflow:hidden;pointer-events:none;transform:translateY(12px);transition:opacity .45s ease,transform .45s ease}
+body.open .entry{display:none}body.open .content{opacity:1;max-height:none;overflow:visible;pointer-events:auto;transform:none}
+.hero{padding:36px 0 32px;border-bottom:1px solid #343434}.grad{width:86px;height:4px;border-radius:8px;background:linear-gradient(90deg,#DFFF5C,#47E9B2,#3F64FF);margin-bottom:18px}
+.hero h2{margin:0;max-width:920px;font-size:clamp(36px,5.3vw,58px);line-height:1.08;letter-spacing:-.065em}.hero h2>span{display:block}.hero h2 em{font-style:normal;color:var(--accent,var(--green))}
+.answer{padding:38px 0 42px}.answer-head{margin-bottom:18px}.answer h3,.more h3,.other h3{margin:0;letter-spacing:-.04em}.answer h3{font-size:clamp(25px,3vw,31px)}
+.cards{display:grid;grid-template-columns:1fr;gap:11px}
+.card{position:relative;min-height:122px;display:grid;grid-template-columns:minmax(0,1fr) 60px;align-items:center;gap:20px;padding:21px 22px 21px 27px;border-radius:16px;overflow:hidden;background:linear-gradient(100deg,var(--tint,rgba(0,196,0,.10)),rgba(255,255,255,.018) 55%),#1b1c1b;box-shadow:inset 0 0 0 1px rgba(255,255,255,.09);transition:transform .18s ease}
+.card:hover{transform:translateY(-3px)}.card:before{content:"";position:absolute;left:0;top:18px;bottom:18px;width:4px;border-radius:0 8px 8px 0;background:var(--bar,var(--accent,var(--green)))}
+.card:nth-child(2){--tint:rgba(63,100,255,.11);--bar:#6683FF}.card:nth-child(3){--tint:rgba(255,255,255,.07);--bar:#d8ddd8}
+.card-copy{min-width:0}.card strong{display:block;font-size:clamp(22px,2.5vw,27px);line-height:1.2;letter-spacing:-.045em}.card .mini{display:block;margin-top:8px;color:#a5aba5;font-size:clamp(13px,1.45vw,15px);line-height:1.42;font-weight:550}
+.card-symbol{width:60px;height:60px;justify-self:end;display:grid;place-items:center;border-radius:50%;font-size:27px;background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
+.more{padding:34px 0 38px;border-top:1px solid #343434}.more-head{margin-bottom:16px}.more h3{font-size:21px}
+.channel-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.channel-card{min-width:0;min-height:104px;padding:18px 17px;display:flex;align-items:center;gap:15px;border-radius:16px;background:#1a1a1a;box-shadow:inset 0 0 0 1px rgba(255,255,255,.10);transition:transform .17s ease,background .17s ease}
+.channel-card:hover{transform:translateY(-3px);background:#202020}
+.channel-icon{width:54px;height:54px;flex:0 0 54px;border-radius:15px;display:grid;place-items:center;overflow:hidden}.channel-icon svg{display:block}.channel-icon.kakao{background:#FEE500}.channel-icon.kakao svg{width:42px;height:42px}.channel-icon.edu{background:#fff}.channel-icon.edu svg{width:44px;height:44px}.channel-icon.partner{background:#3F64FF}.partner-g{display:grid;place-items:center;width:100%;height:100%;color:#fff;font:900 32px/1 Arial,Helvetica,sans-serif}
+.channel-name{min-width:0;display:block;font-size:17px;line-height:1.28;font-weight:800;letter-spacing:-.035em;color:#f5f6f5}
+.other{padding:32px 0 4px;border-top:1px solid #343434}.other-head{margin-bottom:13px}.other h3{font-size:19px}
+.topic-switcher{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.topic{position:relative;min-width:0;min-height:106px;padding:15px 14px 36px;border-radius:14px;background:#191919;box-shadow:inset 0 0 0 1px rgba(255,255,255,.09);display:flex;align-items:flex-start;color:#d5d8d5;transition:background .16s ease,transform .16s ease}
+.topic:hover{transform:translateY(-2px);background:#202020}.topic-label{width:100%;display:flex;flex-direction:column;gap:2px;font-size:14px;line-height:1.3;font-weight:780;letter-spacing:-.035em}.topic-label i{display:block;font-style:normal;white-space:normal;overflow:visible}
+.topic-arrow{position:absolute;left:14px;bottom:11px;font-size:16px;line-height:1;color:#9ba09b}
+.topic.active{background:linear-gradient(135deg,rgba(0,196,0,.16),rgba(0,196,0,.035)),#191d19;box-shadow:inset 0 0 0 1px rgba(0,196,0,.42);color:#fff;pointer-events:none}.topic.active .topic-arrow{color:var(--green);font-weight:900}
+@media(max-width:720px){
+ .app{padding:0 18px 52px}.top{height:58px}.brand-logo{width:94px;height:32px}.event-date{font-size:14px}
+ .entry{min-height:calc(100svh - 58px);padding:34px 0 30px}.entry h1{font-size:33px}.hero{padding:28px 0}.hero h2{font-size:clamp(30px,8.3vw,40px)}
+ .answer{padding:30px 0 35px}.answer h3{font-size:clamp(22px,5.7vw,27px)}.card{min-height:112px;grid-template-columns:minmax(0,1fr) 52px;gap:13px;padding:18px 16px 18px 21px}.card strong{font-size:clamp(20px,5vw,23px)}.card .mini{font-size:clamp(12px,3vw,14px)}.card-symbol{width:52px;height:52px;font-size:24px}
+ .more{padding:30px 0 34px}.more h3{font-size:18px}.channel-cards{gap:6px}.channel-card{min-height:118px;padding:13px 7px;flex-direction:column;align-items:center;justify-content:center;gap:9px;text-align:center;border-radius:12px}.channel-icon{width:44px;height:44px;flex-basis:44px;border-radius:11px}.partner-g{font-size:27px}.channel-name{font-size:12px;text-align:center}
+ .other{padding-top:29px}.other h3{font-size:17px}.topic-switcher{gap:5px}.topic{min-height:104px;padding:12px 9px 32px}.topic-label{font-size:11.5px;line-height:1.3}.topic-arrow{left:9px;bottom:9px;font-size:14px}
+}
+@media(max-width:390px){
+ .app{padding-left:14px;padding-right:14px}.brand-logo{width:90px}.event-date{font-size:13px}.channel-card{min-height:113px;padding:11px 5px}.channel-icon{width:41px;height:41px;flex-basis:41px}.channel-name{font-size:10.5px}.topic{min-height:102px;padding:11px 7px 31px}.topic-label{font-size:10.5px}
+}
+
+</style>
+</head>
+<body>
+<div class="app">
+<header class="top">
+ <a class="brand-logo" href="#" aria-label="NEXT STAGE"><img src="https://cdn.imweb.me/upload/S20231123121fb6d98a452/c93187d4aba1a.png" alt="NEXT STAGE"></a>
+ <span class="event-date">10.13 ~ 14</span>
+</header>
+<section class="entry" id="entry" role="button" tabindex="0" aria-label="가이드 열기">
+ <div class="entry-inner">
+  <div class="rings"><i class="ring r1"></i><i class="ring r2"></i><i class="ring r3"></i><div class="center">↗</div></div>
+  <small>QR에서 선택한 고민이 도착했어요</small>
+  <h1>같은 비용으로,<br><em>광고 효과를</em><br>높이려면?</h1>
+ </div>
+ <button class="tap" id="tap" type="button"><span class="tap-dot">↗</span><span>눌러서 답변 확인하기</span></button>
+</section>
+<main class="content" id="content">
+ <section class="hero"><div class="grad"></div><h2><span>같은 비용으로,</span><span><em>광고 효과를</em> 높이려면?</span></h2></section>
+ <section class="answer">
+  <div class="answer-head"><h3>이 3가지를 먼저 확인해보세요</h3></div>
+  <div class="cards"><a class="card" href="#"><div class="card-copy"><strong>G마켓 광고 활용법</strong><span class="mini">광고 상품별 특징과 실전 운영 방법을 확인해보세요.</span></div><div class="card-symbol" aria-hidden="true">🎯</div></a>
+<a class="card" href="#"><div class="card-copy"><strong>성과 데이터 점검</strong><span class="mini">노출·클릭·전환 데이터를 기준으로 광고 성과를 살펴보세요.</span></div><div class="card-symbol" aria-hidden="true">📊</div></a>
+<a class="card" href="#"><div class="card-copy"><strong>판매자 교육 콘텐츠</strong><span class="mini">광고 운영에 바로 적용할 수 있는 교육과 노하우를 확인해보세요.</span></div><div class="card-symbol" aria-hidden="true">💡</div></a></div>
+ </section>
+ 
+<section class="more">
+ <div class="more-head"><h3>필요한 채널에서 바로 확인해보세요</h3></div>
+ <div class="channel-cards">
+  <a class="channel-card" href="https://pf.kakao.com/_xdxnxbSb" target="_blank" rel="noopener noreferrer">
+   <div class="channel-icon kakao" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M24 8C14.1 8 6 14.4 6 22.3c0 5.1 3.4 9.6 8.5 12.1l-2.2 7.2c-.2.7.6 1.2 1.2.8l8.7-5.8c.6.1 1.2.1 1.8.1 9.9 0 18-6.4 18-14.4S33.9 8 24 8Z" fill="#191919"/></svg></div>
+   <strong class="channel-name">G마켓 비즈니스<br>카카오톡 채널</strong>
+  </a>
+  <a class="channel-card" href="https://www.youtube.com/@gmarket_edu" target="_blank" rel="noopener noreferrer">
+   <div class="channel-icon edu" aria-hidden="true"><svg viewBox="0 0 48 48"><rect x="5" y="11" width="38" height="26" rx="8" fill="#FF0033"/><path d="M21 18.5 31 24l-10 5.5Z" fill="#fff"/></svg></div>
+   <strong class="channel-name">G마켓 옥션<br>판매자 교육센터</strong>
+  </a>
+  <a class="channel-card" href="https://partner.gmarket.com/" target="_blank" rel="noopener noreferrer">
+   <div class="channel-icon partner" aria-hidden="true"><span class="partner-g">G</span></div>
+   <strong class="channel-name">G마켓<br>파트너센터</strong>
+  </a>
+ </div>
+</section>
+
+ <section class="other">
+  <div class="other-head"><h3>다른 고민도 이어서 해결해보세요</h3></div>
+  <div class="topic-switcher" aria-label="고민 선택"><a class="topic active" href="#" aria-current="page"><span class="topic-label"><i>같은 비용으로,</i><i>광고 효과를 높이려면?</i></span><span class="topic-arrow" aria-hidden="true">→</span></a><a class="topic" href="global.html"><span class="topic-label"><i>내 상품도 해외에서</i><i>통할까? 궁금하다면,</i></span><span class="topic-arrow" aria-hidden="true">→</span></a><a class="topic" href="top-seller.html"><span class="topic-label"><i>매출 상위 1%는</i><i>어떻게 팔고 있을까?</i></span><span class="topic-arrow" aria-hidden="true">→</span></a></div>
+ </section>
+</main>
+</div>
+
+<script>
+(function(){
+ var opened=false,entry=document.getElementById('entry'),tap=document.getElementById('tap');
+ function openGuide(){
+  if(opened)return; opened=true; entry.classList.add('is-pressed');
+  if(navigator.vibrate)navigator.vibrate(18);
+  window.setTimeout(function(){document.body.classList.add('open');window.scrollTo(0,0)},180);
+ }
+ tap.addEventListener('click',function(e){e.stopPropagation();openGuide()});
+ entry.addEventListener('click',openGuide);
+ entry.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();openGuide()}});
+})();
+</script>
+
+</body>
+</html>
