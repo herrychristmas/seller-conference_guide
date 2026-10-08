@@ -1131,48 +1131,103 @@
   }
 
 
-  /* ===== Seller question-led hub ===== */
-  .growth-finder{
-    margin-top:18px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:20px;
-    padding:18px 20px;
-    border:1px solid rgba(255,255,255,.09);
-    border-radius:20px;
-    background:
-      linear-gradient(90deg,rgba(216,255,0,.025),rgba(94,231,244,.025),rgba(29,102,215,.04)),
-      #0b0d10;
+  /* ===== More Gmarket information ===== */
+  .hub-resources{
+    margin-top:14px;
+    padding-top:10px;
+    border-top:1px solid #2b2d32;
   }
-  .growth-finder-copy span{
-    display:block;
-    margin-bottom:4px;
-    color:#7fe7ef;
-    font-size:11px;
-    font-weight:900;
-    letter-spacing:.04em;
-  }
-  .growth-finder-copy strong{
-    font-size:16px;
+  .hub-resources h2{
+    margin:0 0 8px;
+    color:#e5e8ed;
+    font-size:14px;
+    font-weight:800;
+    line-height:18px;
     letter-spacing:-.02em;
   }
-  .growth-finder-options{
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:flex-end;
-    gap:8px;
+  .resource-grid{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:10px;
   }
-  .growth-finder-options button{
-    border:1px solid rgba(255,255,255,.11);
-    border-radius:999px;
-    background:#11141a;
-    color:#d9dde2;
-    padding:9px 13px;
-    font-size:12px;
+  .resource-card{
+    display:grid;
+    grid-template-columns:36px minmax(0,1fr) 66px;
+    align-items:center;
+    gap:10px;
+    min-width:0;
+    min-height:74px;
+    padding:3px 10px;
+    border:1px solid #2b2d32;
+    border-radius:16px;
+    background:#17181b;
+    color:#fff;
+    text-decoration:none;
+    transition:border-color .16s ease,background .16s ease;
+  }
+  .resource-card:hover{
+    border-color:#525862;
+    background:#1d1f23;
+  }
+  .resource-card:focus-visible{
+    outline:2px solid var(--lime);
+    outline-offset:3px;
+  }
+  .resource-icon{
+    display:grid;
+    place-items:center;
+    width:36px;
+    height:36px;
+    border-radius:11px;
+  }
+  .resource-icon svg{
+    display:block;
+    width:27px;
+    height:27px;
+  }
+  .resource-icon-kakao{background:#fee500;color:#191919;}
+  .resource-icon-youtube{background:#fff;}
+  .resource-icon-partner{background:#5957ff;}
+  .resource-icon-partner span{
+    font-family:Arial,sans-serif;
+    font-size:27px;
+    font-weight:900;
+    line-height:1;
+  }
+  .resource-name{
+    min-width:0;
+    font-size:14px;
     font-weight:800;
+    line-height:1.4;
+    letter-spacing:-.03em;
+    white-space:nowrap;
+    word-break:keep-all;
+    overflow-wrap:normal;
   }
-  .growth-finder-options button:active{transform:scale(.98);}
+  .resource-qr{
+    display:block;
+    width:66px;
+    height:66px;
+    justify-self:end;
+    background:#fff;
+    border-radius:4px;
+    image-rendering:pixelated;
+  }
+  @media(max-width:1100px){
+    .resource-card{grid-template-columns:32px minmax(0,1fr) 66px;gap:8px;padding:3px 8px;}
+    .resource-icon{width:32px;height:32px;border-radius:10px;}
+    .resource-icon svg{width:25px;height:25px;}
+    .resource-icon-partner span{font-size:25px;}
+    .resource-name{font-size:12.5px;}
+  }
+  @media(max-width:1000px){
+    .resource-grid{grid-template-columns:1fr;gap:8px;}
+  }
+  @media(max-width:380px){
+    .resource-card{grid-template-columns:28px minmax(0,1fr) 66px;gap:6px;padding:3px 6px;}
+    .resource-icon{width:28px;height:28px;border-radius:9px;}
+    .resource-name{font-size:11.5px;}
+  }
 
   .content-step{
     display:block;
@@ -1185,11 +1240,6 @@
   .content-card[aria-disabled="true"]{cursor:default;}
   .content-card[aria-disabled="true"]:active{transform:none;}
   .content-card[aria-disabled="true"] .cta span:last-child{background:#1f242b;color:#89939f;}
-
-  @media(max-width:900px){
-    .growth-finder{align-items:flex-start;flex-direction:column;}
-    .growth-finder-options{justify-content:flex-start;}
-  }
 
   /* ===== Curated content types ===== */
   .content-card[data-type="VIDEO"] .tag{border-color:rgba(94,231,244,.30);}
@@ -1257,6 +1307,123 @@
   }
 
 
+
+  /* ===== Fit available height without stretching cards to fill the screen ===== */
+  .footer-note:empty{display:none;}
+  @media (min-width:900px),
+         (min-width:700px) and (min-height:900px) and (orientation:portrait){
+    .app{min-height:100dvh;}
+    .topbar{height:54px;padding:0 22px;}
+    .gmarket-logo{width:116px;}
+    .brand{gap:10px;}
+    .brand-copy span{font-size:11px;}
+    .brand-copy small{font-size:10px;margin-top:2px;}
+    .home-btn{min-height:36px;padding:8px 12px;font-size:12px;}
+    .screen{padding:12px 22px 14px;}
+    #hubScreen.active,#categoryScreen.active{
+      display:grid;
+      height:auto;
+      min-height:0;
+      align-content:start;
+      gap:12px;
+    }
+    #hubScreen.active{grid-template-rows:auto auto auto;}
+    #categoryScreen.active{grid-template-rows:auto auto;}
+    .hub-intro{position:relative;margin:0;}
+    .title-row{gap:18px;}
+    .hub-intro h1{font-size:34px;line-height:1.05;}
+    .hub-intro p{margin-top:5px;max-width:calc(100% - 165px);font-size:13px;line-height:1.4;}
+    .next-stage-mini{width:108px;min-width:108px;}
+    .hub-intro .hint{display:block;position:absolute;right:0;bottom:0;margin:0;font-size:11px;}
+    .hub-grid{
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      grid-template-rows:repeat(2,var(--fit-hub-card-height,154px));
+      min-height:0;
+      gap:10px;
+    }
+    .hub-card{
+      display:grid;
+      grid-template-columns:36px minmax(0,1fr) 30px;
+      grid-template-rows:auto auto;
+      align-content:center;
+      column-gap:12px;
+      row-gap:5px;
+      height:100%;
+      min-height:0;
+      padding:12px 16px;
+      border-radius:18px;
+    }
+    .hub-card .icon-wrap{grid-column:1;grid-row:1 / 3;align-self:center;width:36px;height:36px;margin:0;border-radius:10px;}
+    .hub-card .accent{display:none;}
+    .hub-card h2{grid-column:2;grid-row:1;margin:0;font-size:22px;line-height:1.15;}
+    .hub-card p{grid-column:2;grid-row:2;max-width:none;font-size:13px;line-height:1.4;word-break:keep-all;}
+    .hub-card .arrow{position:static;grid-column:3;grid-row:1 / 3;align-self:center;width:30px;height:30px;}
+    .hub-resources{margin:0;padding-top:10px;}
+    .hub-resources h2{margin-bottom:6px;font-size:13px;line-height:18px;}
+    .resource-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;}
+    .resource-card{grid-template-columns:28px minmax(0,1fr) 66px;gap:6px;min-height:74px;padding:3px 8px;border-radius:13px;}
+    .resource-icon{width:28px;height:28px;border-radius:9px;}
+    .resource-icon svg{width:23px;height:23px;}
+    .resource-icon-partner span{font-size:23px;}
+    .resource-name{font-size:clamp(11.5px,1.3vw,13px);}
+
+    .section-head{margin:0;padding:15px 20px;gap:16px;border-radius:18px;}
+    .section-head .eyebrow{padding:5px 8px;font-size:10px;line-height:1.2;}
+    .section-head h1{margin:8px 0;font-size:30px;line-height:1.12;}
+    .section-head h1::after{width:44px;height:3px;margin-top:8px;}
+    .section-head p{max-width:none;font-size:13px;line-height:1.4;}
+    .detail-next-stage{width:96px;min-width:96px;margin-top:2px;}
+    .content-grid{
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      grid-template-rows:auto;
+      align-items:stretch;
+      height:auto;
+      max-height:none;
+      min-height:0;
+      gap:14px;
+    }
+    .content-card{display:flex;flex-direction:column;height:auto;min-height:0;border-radius:17px;}
+    .content-card .thumb{height:var(--fit-thumb-height,auto);width:100%;aspect-ratio:16/9;min-height:0;flex:0 0 auto;}
+    .content-card .thumb-image{object-fit:contain;transform:none;}
+    .content-card:hover .thumb-image{transform:none;}
+    .content-card .thumb .tag{top:10px;left:10px;padding:5px 8px;font-size:10px;}
+    .content-card .play-badge{width:44px;height:44px;}
+    .content-body{height:auto;min-height:118px;padding:12px 14px;}
+    .content-step{margin-bottom:5px;font-size:10px;}
+    .content-body h3{display:block;font-size:17px;line-height:1.35;overflow:visible;-webkit-line-clamp:unset;}
+    .cta{margin-top:auto;padding-top:10px;font-size:12px;}
+    .cta span:last-child{width:26px;height:26px;font-size:13px;}
+    .thumb-native-copy{top:25%;}
+    .thumb-native-title{font-size:clamp(20px,2.2vw,28px);}
+    .thumb-native-copy small{margin-top:6px;font-size:11px;}
+
+    #hubViewerScreen{height:var(--fit-viewer-height,calc(100dvh - 54px));padding:10px 18px 12px;}
+    .hub-viewer-shell{height:100%;min-height:0;border-radius:18px;}
+    .hub-viewer-toolbar{min-height:54px;gap:10px;padding:8px 12px;}
+    .hub-viewer-btn{padding:8px 12px;font-size:12px;}
+    .hub-viewer-title{font-size:14px;}
+    .hub-viewer-kicker{font-size:10px;margin-bottom:2px;}
+    .hub-video-status{padding:7px 12px;gap:8px;}
+    .hub-video-status p{font-size:12px;}
+    .detail-topbar{top:64px;margin-bottom:14px;}
+
+    .fit-tight .topbar{height:48px;}
+    .fit-tight .screen{padding:8px 20px 10px;}
+    .fit-tight #hubScreen.active,.fit-tight #categoryScreen.active{gap:10px;}
+    .fit-tight .hub-intro p{margin-top:4px;}
+    .fit-tight .next-stage-mini{width:94px;min-width:94px;}
+    .fit-tight .hub-grid{gap:8px;}
+    .fit-tight .hub-card{padding:10px 14px;row-gap:4px;}
+    .fit-tight .section-head{padding:12px 16px;}
+    .fit-tight .section-head h1{margin:6px 0;}
+    .fit-tight .content-body{min-height:106px;padding:8px 12px;}
+    .fit-tight .cta{padding-top:8px;}
+  }
+  @media (min-width:700px) and (min-height:900px) and (orientation:portrait){
+    .resource-grid{grid-template-columns:1fr;gap:6px;}
+    .resource-name{font-size:13px;}
+  }
+
 </style>
 
 </head>
@@ -1292,16 +1459,24 @@
 
   <section class="hub-grid" id="hubGrid"></section>
 
-  <section class="growth-finder">
-    <div class="growth-finder-copy">
-      <span>뭘 봐야 할지 모르겠다면?</span>
-      <strong>지금 가장 궁금한 것을 골라 보세요.</strong>
-    </div>
-    <div class="growth-finder-options">
-      <button onclick="openCategory('ads')">노출·광고</button>
-      <button onclick="openCategory('global')">해외 판매</button>
-      <button onclick="openCategory('star')">배송</button>
-      <button onclick="openCategory('campaign')">프로모션</button>
+  <section class="hub-resources" aria-labelledby="hubResourcesTitle">
+    <h2 id="hubResourcesTitle">G마켓 정보를 더 알고 싶다면?</h2>
+    <div class="resource-grid">
+      <a class="resource-card" href="https://pf.kakao.com/_xdxnxbSb" target="_blank" rel="noopener noreferrer" aria-label="G마켓 비즈니스 카카오톡 채널 (새 창)">
+        <span class="resource-icon resource-icon-kakao"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 5C9.4 5 4 9.2 4 14.3c0 3.3 2.2 6.2 5.6 7.8l-1.3 4.7c-.1.5.4.8.8.5l5.7-3.7 1.2.1c6.6 0 12-4.2 12-9.4S22.6 5 16 5Z" fill="currentColor"/></svg></span>
+        <span class="resource-name">G마켓 비즈니스 카카오톡 채널</span>
+        <img class="resource-qr" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASgAAAEoCAIAAABkZftOAAAEzUlEQVR42u3dUa6rSAxF0U6L+U/5vu/3kUZ15YNteq0BEEKyVUhWwefn5+cf4Fn/ugQgPBAeIDwQHiA8EB4gPBAeIDwQHggPEB4IDxAeCA8QHggPEB4ID4QHCA+EBwgPhAcID4QHCA+EB8IDhAfvc6U/4PP5rLgQVe8J/PZ9T4+fPs7pdeg6n+3/ByseuNUE4QHCA+EBwgPhAb90dX1wek7yzekcqWoOdnr803lal6r53pb/gxUP3GoCwgPhAcID4YHwgIdc006oaq5SNRc6naedzrWq5nVV++jSc8vt/wcrHrjVBIQHwgOEB8ID4QEPuVyCWl376Kr2xVV9r2lzMyseIDwQHggPEB4IDxAeLGOOd6PruZdb5mbmdVY8EB4gPBAeCA8QHggPiBg3x5s2F0rvZ/smPa+b9p7ALf8HKx4IDxAeCA8QHggPhAc8pG2Ol37OZPo80/O09Pvuut6nt/3/YMUD4QHCA+EBwgPhgfCAh8TneNv3U3Wd//b36b31/2DFA+EBwgPhAcID4YHwgIfE53jb95udqtq3dnqc9D66rv1yVb/XtPcKWvFAeCA8QHggPEB4IDzgxmf7frPt+7vS87euedf280z/r6x44FYThAcID4QHCA+EB9yIz/G69nF1vf9t2ryr6vdKvw+w63p2XWcrHrjVBOEBwgPhAcID4QE3XjvH+6ZqXnd6/PgP2fQ80qrrsGX/nhUP3GoCwgPhAcID4YHwgIdcXR/ctb/rrfvr0vPJ9O/iuZqAW00QHiA8EB4gPBAe8Jf4HK9rXpc+n/TnTtsvN21OWHX9u87figfCA+EBwgPhAcID4QE34nO8afO3rvM5ncul505V+9C65qJdv7sVD9xqAsID4QHCA+GB8ICHjHuu5rd5S9f737rmaenrWWXLdT69blY8cKsJCA+EBwgPhAcID5p9uuYYW95TN22OlP5e269D13NHrXjgVhMQHggPhAcID4QHFLumnVB6nlN1nGlzoarrPG1f4rTf0YoHbjUB4YHwAOGB8EB4wEPa3o+Xno91zdm6nvPZpWvumt7HaMUDt5qA8EB4gPBAeIDwoNma52qe6povtf2QL50TvvX7WvFAeCA8QHggPEB4IDzgxrj9eKfH2X4+XfsA079vWnr/nhUP3GoCwgPhAcID4QHCg2bxOV56TpU+zpb3xU2b11X9XqefO22+asUDt5ogPEB4IDxAeCA84Jfiz9Wc9l6yb6bN97rmdenr+X97X6IVD9xqgvAA4YHwAOGB8IBfuro+ePt7+bbMndLzq2nzMSseIDwQHggPEB4IDxAevMQ17YSmPRexaw52OpebNk9L7xuc9rxWKx641QSEB8ID4QHCA+EBxS6X4L+l96elj9P1fM5p123aPkArHggPhAcID4QHCA+EB9wwx7tRNRdKvy9uy7xu2u/SNfez4oFbTRAeIDwQHiA8EB5wY9wcb9q+qe3nk57vpeeK6eejeq4muNUEhAfCA4QHwgOEB0N9tr8nrUrXfraq86y6/m89/rT3B1rxwK0mCA8QHggPEB4ID7jxmbbfDKx4gPBAeIDwQHiA8EB4gPBAeCA8QHggPEB4IDxAeCA8QHggPBAeIDwQHiA8EB4gPBAeIDwQHggPEB4IDxAerPQHm/5OXypgOMIAAAAASUVORK5CYII=" width="66" height="66" alt="G마켓 비즈니스 카카오톡 채널 QR 코드">
+      </a>
+      <a class="resource-card" href="https://www.youtube.com/@gmarket_edu" target="_blank" rel="noopener noreferrer" aria-label="G마켓 옥션 판매자 교육센터 (새 창)">
+        <span class="resource-icon resource-icon-youtube"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="7" width="26" height="18" rx="6" fill="#ff193b"/><path d="m13 11 8 5-8 5Z" fill="#fff"/></svg></span>
+        <span class="resource-name">G마켓 옥션 판매자 교육센터</span>
+        <img class="resource-qr" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASgAAAEoCAIAAABkZftOAAAEqklEQVR42u3dUW7bQAxF0arQ/recrsBJpyX1SPucb0NWFF+MAGKk6+vr6xfwrN8uAQgPhAcID4QHCA+EBwgPhAcID4QHwgOEB8IDhAfCA4QHwgOEB8ID4QHCA+EBwgPhAcID4QHCA+GB8ADhwfu5u7/guq4VF+LVewKrzv/0+FWfr/q/VL1HcfvvwYoHbjUB4YHwAOGB8EB4wEPu1Bd3z0le6Z5fvTp+9zzw9HxSx9n+e7DigVtNQHggPEB4IDwQHvCQe9oJpeZdVefZPffr3teXug7bfw9WPHCrCQgPhAfCA4QHwgOK3S7B96bNu7bv68OKB8ID4QHCA+EBwgPhAX/FHK9Y99wvdRzzOiseCA8QHggPEB4ID4QHPGrcHG/LvKjq+Zap69b93M5P+z1Y8UB4gPBAeCA8QHggPKBYbI5XtU9su+732qXes5d6XqgVDxAeCA+EBwgPhAcID97E5XmJP1yg5jlV97yrah54enyseCA8QHggPBAeIDwQHvBf2ud43c9j7N7P9krqum05n5TUfNWKB241AeGB8EB4gPBAeECx2H681Fxoy/63aef5ac/JNMcDt5qA8EB4gPBAeIDwIKz9/Xjvuq+s6jxT+wZT+9BSc87u34MVD9xqAsID4YHwAOGB8IBi9/Y/4HQelZr/dM+vuudRqf1+rz6fep6qFQ/cagLCA+EBwgPhgfCAh1zb979Nm8+k3vuXOv60/Zap62nFA7eagPBAeCA8QHggPKDYuP143fu4pj1n8tSW5212/1+6r6f344FbTUB4IDxAeCA8QHgQ1j7Hq9rfVTXn6f5899/bfZxpv4fu7/V+PHCrCQgPhAcID4QHCA+GWrMf7/Tz7zofSz0Pc8vvYcvfa8UD4YHwAOGB8ADhgfCAH1zT9mu9PNGifXHb99d16963lnquqffjAcID4YHwAOGB8ADhwTLtc7zu52Ru34+XOv6pT5tDej8euNUEhAfCA4QHwgOEB2Hj3o/XLTUn7J5nTjPtunk/HiA8EB4IDxAeCA8QHizzcc/VPD1+at9g1XFSz8msus5bfj9WPHCrCQgPhAfCA4QHwgOKte/HmzY/mfaetO1zwqp5YPdc0X48QHggPBAeIDwQHiA8WGbNfrzYBVq+X67qPKuOX3X9txzfigduNUF4gPBAeIDwQHjAPxq3Hy/ldG5T9fmqOdKW98h1/71V/y8rHrjVBIQHwgOEB8IDhAdhd+qLU3OVae/Z6z7/acevug7dcz8rHrjVBIQHwgOEB8IDhAdh97QT+rTnOna/1y51Pql5Y/e+SiseuNUEhAfCA4QHwgPhAQ+5XYLvTXse5ulxTv+uquuQup7TvteKB241QXiA8EB4gPBAeMA/MscrNu25mtv3JVZdByseIDwQHggPEB4IDxAeLDNujpd6zmG3qudSTtund3qeVZ8/PX/vxwOEB8ID4QHCA+EBwoNlYnO8LfupUnOq1DztlS3HOeX9eOBWExAeCA8QHggPEB4Mdb3r/jew4gHCA+GB8ADhgfAA4YHwAOGB8ADhgfBAeIDwQHiA8EB4gPBAeIDwQHggPEB4IDxAeCA8QHggPEB4IDwQHvCoP318QnGjgZ/oAAAAAElFTkSuQmCC" width="66" height="66" alt="G마켓 옥션 판매자 교육센터 QR 코드">
+      </a>
+      <a class="resource-card" href="https://partner.gmarket.com/" target="_blank" rel="noopener noreferrer" aria-label="G마켓 파트너센터 (새 창)">
+        <span class="resource-icon resource-icon-partner"><span aria-hidden="true">G</span></span>
+        <span class="resource-name">G마켓 파트너센터</span>
+        <img class="resource-qr" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASgAAAEoCAIAAABkZftOAAAEt0lEQVR42u3dUY6jQAxAwWXF/a+cOQGDPLKxTaq+I0IIT43Uavr4fD7/gGf9dwlAeCA8QHggPEB4IDxAeCA8QHggPBAeIDwQHiA8EB4gPBAeIDwQHggPEB4IDxAeCA8QHggPEB4ID4QHCA/e56z+guM4VlyI6D6BV78ra7/BrONvOc72+8GIBx41AeGB8EB4gPBAeECys+uLq+dJrkTnkao/H70+WcevPk70/91yPxjxwKMmIDwQHiA8EB4ID3jIOe2EqufBqo/TNc8WnffL+vy33Q9GPPCoCQgPhAcID4QHwgMecroEf1M9z5Z1Plnr4qbN7xnxAOGB8ADhgfBAeIDw4OXM493oWhcXPZ+37lNnxAOEB8IDhAfCA4QHwoMvNW4eb9r6rup1dFeq179l/a6u8zTiAcID4QHCA+GB8ADhwcu1zeNtWQ9Wvb/ctM9f6XovqBEPEB4IDxAeCA8QHggPvtRhf7Ohf0zT/nvuByMeCA8QHggPEB4IDxAejFC+Hu+t69OyvvdK9DjV59M1HzhtX0EjHnjUBIQHwgOEB8ID4QEPaVuPVz0/c6X6+NHvnTYfOO36dN0/1V0Y8cCjJggPEB4IDxAeCA+4cU47oep90qbtF1c9z9Z1faK/N+t8tuyzZ8QD4YHwAOGB8ADhgfCAG+P2x9uyn1vXOrrt59P1P3qvJiA8EB4IDxAeCA8QHizTth5v2nsdr0w7n+h5ftu8qPdqAsID4YHwAOGB8ADhwUuUz+N1zZNkHX/L/m9d83Vd1yfr+F3zrkY8EB4IDxAeCA8QHggPuGF/vBtZ68Gin6+ed5q2T+D2+8qIBx41AeGB8EB4gPBAeECycfN41evEso6fNX9VvZ6t+nyi85Bd/1f1/WbEA4+agPBAeCA8QHggPCDZsWU/tOhxorbvCxf9Xdv3J9zy3lEjHnjUBOEBwgPhAcID4QF/1LYe763zdVnvz5x2/bOOX73urnp+z4gHHjUB4YHwAOGB8EB4wEOOafNa1cevXodWPT/ZNe9XfT9Ebb/ORjzwqAnCA4QHwgOEB8IDbhzb3yfZte6r+vd2Xc9p3no/GPFAeCA8QHggPEB4IDzgxrj1eF2fj9o+f7jd9nWJRjwQHggPEB4IDxAeCA+4cWyfDym/QMPWuWV975b3Uk6bpzXigUdNQHggPEB4IDwQHvCQs/oLtr+/MTqfU73PXtb17Fo32LU/4bT70IgHwgPhAcID4QHCA+EBN86uL97+nsms+ajq9XXR41TPj01b/2l/PPCoCQgPhAcID4QHCA+GOqed0LT3Im7Zf696nVvX/1j9/xrxwKMmIDwQHiA8EB4gPBjqdAl+F51P2/Jex+jv7bqeUV3vCzXigUdNQHggPBAeIDwQHpDMPN6NrvdSVr+vcvv7M7v22TPigUdNQHggPEB4IDwQHvCQcfN4W/ZPy5oH6/r8lv0Ju96PasQDj5qA8EB4gPBAeIDwoFnbPN6W90xWn+e0+b1q1fv1WY8HCA+EB8IDhAfCA4QHL3FMW/8GRjxAeCA8QHggPEB4IDxAeCA8EB4gPBAeIDwQHiA8EB4gPBAeCA8QHggPEB4IDxAeCA8QHggPhAcID4QHCA9W+gE+ck53TZIAaAAAAABJRU5ErkJggg==" width="66" height="66" alt="G마켓 파트너센터 QR 코드">
+      </a>
     </div>
   </section>
   <div class="footer-note"></div>
@@ -1423,11 +1598,12 @@ const CONTENT = {
         },
         {
           type: "VIDEO",
+          thumbnail: "https://img.youtube.com/vi/nIuzFU6zZ4w/hqdefault.jpg",
           visualLabel: "AI PRODUCT ADS",
-          title: "AI Product Ads, 어떻게 등록할까?",
+          title: "AI Product Ads, 직접 등록하는 방법은?",
           desc: "가이드 영상 보기",
           ctaLabel: "가이드 영상 보기",
-          link: ""
+          link: "https://www.youtube.com/watch?v=nIuzFU6zZ4w"
         }
       ]
     },
@@ -1459,11 +1635,13 @@ const CONTENT = {
         },
         {
           type: "VIDEO",
-          visualLabel: "FLASH SALE",
-          title: "새로워진 플래시세일, 무엇이 달라졌을까?",
+          visualLabel: "PROMOTION",
+          nativeThumb: { visual: "flash", title: "프로모션", accent: "참여하기", caption: "가이드 영상 보기" },
+          preferNativeThumb: true,
+          title: "프로모션, 어떻게 참여할까?",
           desc: "가이드 영상 보기",
           ctaLabel: "가이드 영상 보기",
-          link: ""
+          link: "https://youtu.be/8J6m4InIsUU?si=mmDteHvQrm9FjEmw"
         }
       ]
     },
@@ -1675,6 +1853,8 @@ function buildThumb(item){
       </div>
     `;
   }
+
+  if(item.nativeThumb && item.preferNativeThumb) return buildNativeThumb(item);
 
   const ytId = getYoutubeId(item.link || "");
   if(ytId){
@@ -2074,6 +2254,92 @@ if(CONTENT.categories[initialTab]){
     openCategory(initialTab, false);
   }
 }
+</script>
+<script id="viewportHeightFit">
+/* Measure the visible height on each screen; never stretch cards to fill spare space. */
+(function initHeightFit(){
+  const root = document.documentElement;
+  const query = window.matchMedia('(min-width:900px), (min-width:700px) and (min-height:900px) and (orientation:portrait)');
+  const hub = document.getElementById('hubScreen');
+  const category = document.getElementById('categoryScreen');
+  const hubGrid = document.getElementById('hubGrid');
+  const contentGrid = document.getElementById('contentGrid');
+  const topbar = document.querySelector('.topbar');
+  let queued = false;
+  const px = value => Number.parseFloat(value) || 0;
+  const height = element => element.getBoundingClientRect().height;
+  const setPx = (element, name, value) => {
+    const next = `${Math.floor(value)}px`;
+    if(element.style.getPropertyValue(name) !== next) element.style.setProperty(name, next);
+  };
+
+  function fit(){
+    queued = false;
+    if(!query.matches){
+      root.classList.remove('fit-tight');
+      root.style.removeProperty('--fit-viewer-height');
+      hub.style.removeProperty('--fit-hub-card-height');
+      category.style.removeProperty('--fit-thumb-height');
+      return;
+    }
+    const viewport = window.visualViewport;
+    const visibleHeight = viewport ? viewport.height : window.innerHeight;
+    const visibleBottom = visibleHeight + (viewport ? viewport.offsetTop : 0);
+    root.classList.toggle('fit-tight', visibleHeight < 620);
+    setPx(root, '--fit-viewer-height', Math.max(0, visibleBottom - topbar.getBoundingClientRect().bottom - 2));
+
+    if(hub.classList.contains('active')){
+      const cards = [...hubGrid.querySelectorAll('.hub-card')];
+      if(!cards.length) return;
+      const fixedHeight = height(hub) - height(hubGrid);
+      const gridGap = px(getComputedStyle(hubGrid).rowGap);
+      const minimum = Math.max(...cards.map(card => {
+        const style = getComputedStyle(card);
+        const text = height(card.querySelector('h2')) + height(card.querySelector('p')) + px(style.rowGap);
+        const decoration = Math.max(height(card.querySelector('.icon-wrap')), height(card.querySelector('.arrow')));
+        return Math.ceil(Math.max(text, decoration) + px(style.paddingTop) + px(style.paddingBottom) + px(style.borderTopWidth) + px(style.borderBottomWidth));
+      }));
+      const room = (visibleBottom - hub.getBoundingClientRect().top - fixedHeight - gridGap - 3) / 2;
+      setPx(hub, '--fit-hub-card-height', Math.max(minimum, Math.min(154, room)));
+    }
+
+    if(category.classList.contains('active')){
+      const cards = [...contentGrid.querySelectorAll('.content-card')];
+      if(!cards.length) return;
+      const bodyHeight = Math.max(...cards.map(card => height(card.querySelector('.content-body'))));
+      const border = Math.max(...cards.map(card => {
+        const style = getComputedStyle(card);
+        return px(style.borderTopWidth) + px(style.borderBottomWidth);
+      }));
+      const naturalHeight = Math.min(...cards.map(card => {
+        const style = getComputedStyle(card);
+        return (card.getBoundingClientRect().width - px(style.borderLeftWidth) - px(style.borderRightWidth)) * 9 / 16;
+      }));
+      const bottomPadding = px(getComputedStyle(category).paddingBottom);
+      const room = visibleBottom - contentGrid.getBoundingClientRect().top - bottomPadding - bodyHeight - border - 3;
+      setPx(category, '--fit-thumb-height', Math.max(72, Math.min(naturalHeight, room)));
+    }
+  }
+  function schedule(){
+    if(!queued){queued = true; requestAnimationFrame(fit);}
+  }
+  window.addEventListener('resize', schedule, {passive:true});
+  window.addEventListener('orientationchange', schedule, {passive:true});
+  window.addEventListener('load', schedule, {once:true});
+  if(window.visualViewport){
+    window.visualViewport.addEventListener('resize', schedule, {passive:true});
+    window.visualViewport.addEventListener('scroll', schedule, {passive:true});
+  }
+  if(document.fonts) document.fonts.ready.then(schedule);
+  const observer = new MutationObserver(schedule);
+  document.querySelectorAll('main.screen').forEach(screen => observer.observe(screen, {attributes:true, attributeFilter:['class']}));
+  observer.observe(contentGrid, {childList:true});
+  if(typeof ResizeObserver !== 'undefined'){
+    const sizes = new ResizeObserver(schedule);
+    document.querySelectorAll('.topbar, .hub-intro, .hub-resources, .section-head').forEach(element => sizes.observe(element));
+  }
+  schedule();
+})();
 </script>
 </body>
 </html>
