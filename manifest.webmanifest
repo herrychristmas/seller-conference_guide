@@ -1,0 +1,24 @@
+{
+  "id": "/seller-conference_guide/app.html",
+  "name": "Gmarket Seller Conference",
+  "short_name": "Seller Hub",
+  "description": "Gmarket Seller Conference tablet hub",
+  "start_url": "./app.html",
+  "scope": "./",
+  "display": "fullscreen",
+  "display_override": [
+    "fullscreen",
+    "standalone"
+  ],
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "orientation": "landscape",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
